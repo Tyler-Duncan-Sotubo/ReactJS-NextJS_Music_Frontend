@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-5xl font-bold;
+  }
+  h2 {
+    @apply text-3xl font-bold;
+  }
+  h3 {
+    @apply text-xl;
+  }
+  h4 {
+    @apply text-[1.1rem];
+  }
+  h5 {
+    @apply text-[1rem];
+  }
+}
+
+@layer components {
+  .flex-row-center {
+    @apply flex justify-center items-center;
+  }
+  .flex-row-between {
+    @apply flex justify-between items-center;
+  }
+  .flex-col-center {
+    @apply flex justify-center items-center flex-col;
+  }
+  .layout-wrapper {
+    @apply sm:w-[90%] mx-auto w-full;
+  }
+}
+
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 6;
+  stroke-miterlimit: 10;
+  stroke: #1e40af;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 3;
+  stroke: #1e40af;
+  stroke-miterlimit: 10;
+  margin: 2% auto;
+  box-shadow: inset 0px 0px 0px #1d4ed8;
+  animation: fill 0.4s ease-in-out 0.4s forwards,
+    scale 0.3s ease-in-out 0.9s both;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+.loading-state {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 10px solid #ddd;
+  border-top-color: orange;
+  animation: loading 1s linear infinite;
+}
+
+.blog h1 {
+  @apply md:text-5xl text-3xl tracking-wide my-10;
+}
+
+.blog p {
+  @apply md:text-xl text-lg tracking-wide leading-loose my-5;
+}
+
+.blog h2 {
+  @apply md:text-4xl text-2xl tracking-wide my-7;
+}
+
+.blog h3 {
+  @apply md:text-2xl text-xl tracking-wide leading-loose my-5;
+}
+
+.blog img {
+  @apply w-full my-10;
+}
+
+@keyframes loading {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #fff;
+  }
+}
