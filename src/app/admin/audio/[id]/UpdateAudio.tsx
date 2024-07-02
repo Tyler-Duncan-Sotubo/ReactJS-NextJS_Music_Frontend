@@ -13,8 +13,27 @@ import axios from "@/lib/axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
+type Audio = {
+  title: string;
+  artist: string;
+  releaseCover: string;
+  copyrightHolder: string;
+  secondaryGenre: string;
+  lyrics: string;
+  label: string;
+  productionHolder: string;
+  language: string;
+  releaseAudioLink: string;
+  primaryGenre: string;
+  status: string;
+  smartLink: string;
+  UPC: string;
+  ISRC: string;
+  id: string;
+};
+
 type UpdateAudioProps = {
-  audio: any;
+  audio: Audio;
 };
 
 const UpdateAudio = ({ audio }: UpdateAudioProps) => {
@@ -126,6 +145,52 @@ const UpdateAudio = ({ audio }: UpdateAudioProps) => {
           <Button className="ml-3 px-8">Update</Button>
         </div>
       </form>
+
+      {/* Audio Details */}
+      <div>
+        <h1 className="text-center py-10">Audio Details</h1>
+        <div className="shadow-2xl  p-10">
+          <div className="flex flex-col gap-5">
+            <p>
+              Title: <span className="ml-1 font-bold">{audio.title}</span>
+            </p>
+            <p>
+              Artist: <span className="ml-1 font-bold">{audio.artist}</span>
+            </p>
+            <p>
+              Label:
+              <span className="ml-1 font-bold">{audio.label}</span>
+            </p>
+            <p>
+              Primary Genre:
+              <span className="ml-1 font-bold">{audio.primaryGenre}</span>
+            </p>
+            <p>
+              Secondary Genre:
+              <span className="ml-1 font-bold">{audio.secondaryGenre}</span>
+            </p>
+            <p>
+              Copyright Holder:
+              <span className="ml-1 font-bold">{audio.copyrightHolder}</span>
+            </p>
+            <p>
+              Production Holder:
+              <span className="ml-1 font-bold">{audio.productionHolder}</span>
+            </p>
+            <p>
+              releaseCover:
+              <span className="ml-1 font-bold">{audio.releaseCover}</span>
+            </p>
+            <p>
+              Status: <span className="ml-1 font-bold">{audio.status}</span>
+            </p>
+            <p>
+              SmartLink:
+              <span className="ml-1 font-bold">{audio.smartLink}</span>
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

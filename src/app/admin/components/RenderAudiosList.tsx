@@ -21,9 +21,26 @@ interface RenderAudiosListProps {
 }
 
 const RenderAudiosList = ({ audios, amountToShow }: RenderAudiosListProps) => {
+  const [selectedAudio, setSelectedAudio] = useState<Audio[]>(audios);
+
   return (
-    <div className="my-20">
+    <div className="my-10">
       <h1 className="text-2xl font-bold text-center my-10">Audios</h1>
+      <div className="flex justify-center my-10">
+        <input
+          type="text"
+          placeholder="Search for a title"
+          className="w-[50%] px-4 py-2 border border-secondary rounded-lg"
+          onChange={(e) => {
+            const searchValue = e.target.value.toLowerCase();
+            const filteredAudios = audios.filter((audio) =>
+              audio.title.toLowerCase().includes(searchValue)
+            );
+            setSelectedAudio(filteredAudios);
+          }}
+        />
+      </div>
+
       <table className="w-[95%] mx-auto bg-white border border-secondary">
         <thead>
           <tr>
@@ -36,7 +53,7 @@ const RenderAudiosList = ({ audios, amountToShow }: RenderAudiosListProps) => {
           </tr>
         </thead>
         <tbody>
-          {audios
+          {selectedAudio
             .reverse()
             .slice(0, amountToShow)
             .map((audio: Audio, index: any) => (

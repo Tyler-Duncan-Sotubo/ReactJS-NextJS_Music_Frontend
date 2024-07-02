@@ -10,10 +10,25 @@ interface RenderUsersListProps {
 }
 
 const RenderUsersList = ({ users, amountToShow }: RenderUsersListProps) => {
+  const [selectedUser, setSelectedUser] = useState<any[]>(users);
+
   return (
     <div>
       <h1 className="text-2xl font-bold text-center my-10">Users</h1>
-
+      <div className="flex justify-center my-10">
+        <input
+          type="text"
+          placeholder="Search for a name"
+          className="w-[50%] px-4 py-2 border border-secondary rounded-lg"
+          onChange={(e) => {
+            const searchValue = e.target.value.toLowerCase();
+            const filteredUsers = users.filter((user) =>
+              user.name.toLowerCase().includes(searchValue)
+            );
+            setSelectedUser(filteredUsers);
+          }}
+        />
+      </div>
       <table className="w-[95%] mx-auto bg-white border border-secondary">
         <thead>
           <tr>
@@ -24,7 +39,7 @@ const RenderUsersList = ({ users, amountToShow }: RenderUsersListProps) => {
           </tr>
         </thead>
         <tbody>
-          {users.slice(0, amountToShow).map((user: any, index: any) => (
+          {selectedUser.slice(0, amountToShow).map((user: any, index: any) => (
             <tr key={index} className="border-b">
               <td className="px-4 py-2 text-center">{user.name}</td>
               <td className="px-4 py-2 text-center">{user.email}</td>

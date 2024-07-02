@@ -1,4 +1,5 @@
 import { adminFetch } from "../../hooks/adminFetch";
+import Update from "./Update";
 
 interface PageProps {
   params: {
@@ -9,8 +10,7 @@ interface PageProps {
 const page = async ({ params }: PageProps) => {
   const { fetchSubscriptionById } = adminFetch();
   const subscription = await fetchSubscriptionById(params.id);
-  console.log(subscription);
-  return <div>{params.id}</div>;
+  return <Update subscription={subscription} />;
 };
 
 export default page;
