@@ -147,7 +147,7 @@ const HomePage = ({ nairaToDollarsRateToday }: any) => {
             <div className="flex justify-center items-center">
               <h1 className="text-4xl font-bold">New Releases</h1>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 mt-6 w-full">
+            <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 mt-6 w-full">
               {releases?.slice(0, 8).map((release: any, index: number) => (
                 <Link href={release.smartLink} key={index} target="_blank">
                   <div className="w-full flex flex-col items-center">

@@ -3,6 +3,7 @@ import AuthSlice from "./slices/authSlice";
 import currencySlice from "./slices/currencySlice";
 import cartSlice from "./slices/cartSlice";
 import adminAuthSlice from "./slices/adminAuthSlice";
+import labelAuthSlice from "./slices/labelAuthSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     currency: currencySlice,
     cart: cartSlice,
     adminAuth: adminAuthSlice,
+    labelAuth: labelAuthSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
