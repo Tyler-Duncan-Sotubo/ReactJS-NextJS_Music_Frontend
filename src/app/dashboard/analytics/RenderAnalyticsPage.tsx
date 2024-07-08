@@ -4,21 +4,21 @@ const RenderAnalyticsPage = ({ streams }: any) => {
   const data = streams[0] ?? {};
 
   // calculate total of all streams
-  const sumTotalStreams = (data: any) => {
-    let sum = 0;
+  // const sumTotalStreams = (data: any) => {
+  //   let sum = 0;
 
-    // Iterate over each key in the data object
-    for (const key in data) {
-      if (data[key] && typeof data[key] === "object" && "total" in data[key]) {
-        sum += parseInt(data[key]?.total, 10); // Convert string to integer and add to sum
-      }
-    }
+  //   // Iterate over each key in the data object
+  //   for (const key in data) {
+  //     if (data[key] && typeof data[key] === "object" && "total" in data[key]) {
+  //       sum += parseInt(data[key]?.total, 10); // Convert string to integer and add to sum
+  //     }
+  //   }
 
-    return sum;
-  };
+  //   return sum;
+  // };
 
   // Calculate total streams
-  const totalStreams = sumTotalStreams(data);
+  // const totalStreams = sumTotalStreams(data);
 
   // Function to format numbers
   function formatNumber(number: number) {
@@ -67,12 +67,12 @@ const RenderAnalyticsPage = ({ streams }: any) => {
                 {formatNumber(data?.total_streams) ?? 0}
               </h4>
             </div>
-            <div className="text-3xl text-center mb-4">
+            {/* <div className="text-3xl text-center mb-4">
               <p className="text-lg">This Week</p>
               <h4 className="text-2xl font-bold text-center my-2 ">
                 {totalStreams}
               </h4>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
