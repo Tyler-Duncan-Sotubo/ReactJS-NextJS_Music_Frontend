@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
+import { MdEditNote } from "react-icons/md";
 import Link from "next/link";
 
 type Audio = {
@@ -50,6 +51,7 @@ const RenderAudiosList = ({ audios, amountToShow }: RenderAudiosListProps) => {
             <th className="px-4 py-2 border">UPC</th>
             <th className="px-4 py-2 border">ISRC</th>
             <th className="px-4 py-2 border">Edit</th>
+            <th className="px-4 py-2 border">Add Streams</th>
           </tr>
         </thead>
         <tbody>
@@ -67,6 +69,13 @@ const RenderAudiosList = ({ audios, amountToShow }: RenderAudiosListProps) => {
                   <Link href={`/admin/audio/${audio.id}`}>
                     <td className="px-4 py-2 flex justify-center">
                       <FaEdit />
+                    </td>
+                  </Link>
+                </td>
+                <td className="px-4 py-2 text-center">
+                  <Link href={`/admin/streams/${audio.id}`}>
+                    <td className="px-4 py-2 flex justify-center">
+                      <MdEditNote size={25} />
                     </td>
                   </Link>
                 </td>

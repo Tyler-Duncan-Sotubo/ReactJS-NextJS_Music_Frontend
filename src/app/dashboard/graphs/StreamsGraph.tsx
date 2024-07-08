@@ -56,6 +56,13 @@ export const StreamsGraph = ({ data }: any) => {
       .map((day) => data.tiktok[day]);
   }
 
+  let facebookData = [];
+  if (data?.facebook) {
+    facebookData = Object.keys(data?.facebook)
+      .filter((day) => day !== "total")
+      .map((day) => data.facebook[day]);
+  }
+
   const EarningsData = {
     // Months
     labels: ["Sat", "Sun", "Mon", "Tues", "Wed", "Thur", "Fri"],
@@ -97,6 +104,14 @@ export const StreamsGraph = ({ data }: any) => {
         data: amazonData,
         backgroundColor: "purple",
         borderColor: "purple",
+        tension: 0.3,
+        borderWidth: 3,
+      },
+      {
+        label: "Facebook",
+        data: facebookData,
+        backgroundColor: "yellow",
+        borderColor: "yellow",
         tension: 0.3,
         borderWidth: 3,
       },

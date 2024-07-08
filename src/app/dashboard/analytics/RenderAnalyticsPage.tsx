@@ -1,14 +1,39 @@
-import { TbTriangleInvertedFilled } from "react-icons/tb";
+import { TbTriangleInvertedFilled, TbTriangleFilled } from "react-icons/tb";
 import { StreamsGraph } from "../graphs/StreamsGraph";
 
 const RenderAnalyticsPage = ({ streams }: any) => {
   const data = streams[0] ?? {};
+  const lastWeek = streams[1] ?? {};
 
+  // calculate total of all streams
+  const sumTotalStreams = (data: any) => {
+    let sum = 0;
+
+    // Iterate over each key in the data object
+    for (const key in data) {
+      if (data[key] && typeof data[key] === "object" && "total" in data[key]) {
+        sum += parseInt(data[key].total, 10); // Convert string to integer and add to sum
+      }
+    }
+
+    return sum;
+  };
+
+  // Calculate total streams
+  const totalStreams = sumTotalStreams(data);
+  const lastWeekTotalStreams = sumTotalStreams(lastWeek);
+
+  // Calculate the percentage increase or decrease in streams
+  const percentage = Math.round(
+    ((totalStreams - lastWeekTotalStreams) / lastWeekTotalStreams) * 100
+  );
+
+  // Function to format numbers
   function formatNumber(number: number) {
     if (number < 1000) {
-      return number.toString();
+      return number?.toString();
     } else {
-      return number.toLocaleString();
+      return number?.toLocaleString();
     }
   }
 
@@ -34,21 +59,46 @@ const RenderAnalyticsPage = ({ streams }: any) => {
           </div>
 
           <div className="md:w-[25%] text-center flex flex-col gap-3 capitalize">
-            <h1 className="text-3xl font-bold text-center mt-20 mb-4">
+            <h1 className="text-2xl font-bold text-center my-6">
               Weekly Report
             </h1>
             <div>
               {data?.week_start && (
-                <p className="text-lg text-center">
+                <p className="text-sm text-center">
                   {data?.week_start} - {data?.week_end}
                 </p>
               )}
             </div>
             <div className="text-3xl text-center mb-4">
               <p className="text-lg">Total Streams</p>
-              <h4 className="text-3xl font-bold text-center ">
+              <h4 className="text-2xl font-bold text-center ">
                 {formatNumber(data?.total_streams) ?? 0}
               </h4>
+            </div>
+            <div className="text-3xl text-center mb-4">
+              <p className="text-lg">This Week</p>
+              <h4 className="text-2xl font-bold text-center my-2 ">
+                {totalStreams}
+              </h4>
+
+              {lastWeekTotalStreams !== 0 && (
+                <>
+                  <p className="text-sm my-2"> vs Previous 7 days</p>
+                  <p className="text-sm">
+                    {percentage > 0 ? (
+                      <span className="text-green-600 text-lg flex items-center justify-center gap-1">
+                        + {percentage}%
+                        <TbTriangleFilled className="inline-block text-2xl" />
+                      </span>
+                    ) : (
+                      <span className=" text-error text-lg flex items-center justify-center gap-1">
+                        {percentage}%
+                        <TbTriangleInvertedFilled className="inline-block text-2xl" />
+                      </span>
+                    )}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -68,7 +118,7 @@ const RenderAnalyticsPage = ({ streams }: any) => {
           </tr>
         </thead>
         <tbody>
-          {data.apple && (
+          {data.apple.total !== 0 && (
             <tr className="mb-4 text-lg">
               <td className=" py-4 flex items-center gap-2">
                 <div
@@ -79,7 +129,7 @@ const RenderAnalyticsPage = ({ streams }: any) => {
               <td className="py-4 text-xl">{formatNumber(data.apple.total)}</td>
             </tr>
           )}
-          {data.spotify && (
+          {data.spotify.total !== 0 && (
             <tr className="mb-4 text-lg">
               <td className=" py-4 flex items-center gap-2">
                 <div
@@ -92,7 +142,7 @@ const RenderAnalyticsPage = ({ streams }: any) => {
               </td>
             </tr>
           )}
-          {data.youtube && (
+          {data.youtube.total !== 0 && (
             <tr className="mb-4 text-lg">
               <td className=" py-4 flex items-center gap-2">
                 <div
@@ -105,7 +155,7 @@ const RenderAnalyticsPage = ({ streams }: any) => {
               </td>
             </tr>
           )}
-          {data.tiktok && (
+          {data.tiktok.total !== 0 && (
             <tr className="mb-4 text-lg">
               <td className=" py-4 flex items-center gap-2">
                 <div
@@ -119,7 +169,20 @@ const RenderAnalyticsPage = ({ streams }: any) => {
               </td>
             </tr>
           )}
-          {data.amazon && (
+          {data.facebook.total !== 0 && (
+            <tr className="mb-4 text-lg">
+              <td className=" py-4 flex items-center gap-2">
+                <div
+                  style={{ backgroundColor: "yellow" }}
+                  className="w-6 h-1"></div>
+                <p>Facebook</p>
+              </td>
+              <td className="py-4 text-xl">
+                {formatNumber(data.facebook.total)}
+              </td>
+            </tr>
+          )}
+          {data.amazon.total !== 0 && (
             <tr className="mb-4 text-lg">
               <td className=" py-4 flex items-center gap-2">
                 <div
@@ -128,7 +191,6 @@ const RenderAnalyticsPage = ({ streams }: any) => {
                 <p>Amazon</p>
               </td>
               <td className="py-4 text-xl">
-                {" "}
                 {formatNumber(data.amazon.total)}
               </td>
             </tr>
