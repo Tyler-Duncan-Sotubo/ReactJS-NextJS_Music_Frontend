@@ -12,6 +12,23 @@ const RenderAnalyticsPage = ({ streams }: any) => {
     }
   }
 
+  // calculate total of all streams
+  const sumTotalStreams = (data: any) => {
+    let sum = 0;
+
+    // Iterate over each key in the data object
+    for (const key in data) {
+      if (data[key] && typeof data[key] === "object" && "total" in data[key]) {
+        sum += parseInt(data[key].total, 10); // Convert string to integer and add to sum
+      }
+    }
+
+    return sum;
+  };
+
+  // Calculate total streams
+  const totalStreams = sumTotalStreams(data);
+
   return (
     <>
       {/* Streams and Downloads */}
@@ -34,20 +51,26 @@ const RenderAnalyticsPage = ({ streams }: any) => {
           </div>
 
           <div className="md:w-[25%] text-center flex flex-col gap-3 capitalize">
-            <h1 className="text-3xl font-bold text-center mt-20 mb-4">
+            <h1 className="text-2xl font-bold text-center my-6">
               Weekly Report
             </h1>
             <div>
               {data?.week_start && (
-                <p className="text-lg text-center">
+                <p className="text-sm text-center">
                   {data?.week_start} - {data?.week_end}
                 </p>
               )}
             </div>
             <div className="text-3xl text-center mb-4">
               <p className="text-lg">Total Streams</p>
-              <h4 className="text-3xl font-bold text-center ">
+              <h4 className="text-2xl font-bold text-center ">
                 {formatNumber(data?.total_streams) ?? 0}
+              </h4>
+            </div>
+            <div className="text-3xl text-center mb-4">
+              <p className="text-lg">This Week</p>
+              <h4 className="text-2xl font-bold text-center my-2 ">
+                {totalStreams}
               </h4>
             </div>
           </div>
@@ -102,6 +125,19 @@ const RenderAnalyticsPage = ({ streams }: any) => {
               </td>
               <td className="py-4 text-xl">
                 {formatNumber(data.youtube.total)}
+              </td>
+            </tr>
+          )}
+          {data.facebook && (
+            <tr className="mb-4 text-lg">
+              <td className=" py-4 flex items-center gap-2">
+                <div
+                  style={{ backgroundColor: "yellow" }}
+                  className="w-6 h-1"></div>
+                <p>facebook</p>
+              </td>
+              <td className="py-4 text-xl">
+                {formatNumber(data.facebook.total)}
               </td>
             </tr>
           )}
