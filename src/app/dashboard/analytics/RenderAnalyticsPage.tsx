@@ -1,9 +1,7 @@
-import { TbTriangleInvertedFilled, TbTriangleFilled } from "react-icons/tb";
 import { StreamsGraph } from "../graphs/StreamsGraph";
 
 const RenderAnalyticsPage = ({ streams }: any) => {
   const data = streams[0] ?? {};
-  const lastWeek = streams[1] ?? {};
 
   // calculate total of all streams
   const sumTotalStreams = (data: any) => {
@@ -12,7 +10,7 @@ const RenderAnalyticsPage = ({ streams }: any) => {
     // Iterate over each key in the data object
     for (const key in data) {
       if (data[key] && typeof data[key] === "object" && "total" in data[key]) {
-        sum += parseInt(data[key].total, 10); // Convert string to integer and add to sum
+        sum += parseInt(data[key]?.total, 10); // Convert string to integer and add to sum
       }
     }
 
@@ -21,12 +19,6 @@ const RenderAnalyticsPage = ({ streams }: any) => {
 
   // Calculate total streams
   const totalStreams = sumTotalStreams(data);
-  const lastWeekTotalStreams = sumTotalStreams(lastWeek);
-
-  // Calculate the percentage increase or decrease in streams
-  const percentage = Math.round(
-    ((totalStreams - lastWeekTotalStreams) / lastWeekTotalStreams) * 100
-  );
 
   // Function to format numbers
   function formatNumber(number: number) {
@@ -80,25 +72,6 @@ const RenderAnalyticsPage = ({ streams }: any) => {
               <h4 className="text-2xl font-bold text-center my-2 ">
                 {totalStreams}
               </h4>
-
-              {lastWeekTotalStreams !== 0 && (
-                <>
-                  <p className="text-sm my-2"> vs Previous 7 days</p>
-                  <p className="text-sm">
-                    {percentage > 0 ? (
-                      <span className="text-green-600 text-lg flex items-center justify-center gap-1">
-                        + {percentage}%
-                        <TbTriangleFilled className="inline-block text-2xl" />
-                      </span>
-                    ) : (
-                      <span className=" text-error text-lg flex items-center justify-center gap-1">
-                        {percentage}%
-                        <TbTriangleInvertedFilled className="inline-block text-2xl" />
-                      </span>
-                    )}
-                  </p>
-                </>
-              )}
             </div>
           </div>
         </div>
