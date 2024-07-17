@@ -10,7 +10,6 @@ import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
 import { useAppSelector } from "@/redux/hooks/hooks";
-import CurrencySelector from "@/components/CurrencySelector";
 
 type NavigationProps = {
   homeRoute?: string;

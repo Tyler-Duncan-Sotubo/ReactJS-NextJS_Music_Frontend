@@ -122,9 +122,8 @@ const PostStreams = ({ audio }: any) => {
   const router = useRouter();
 
   const onSubmit = async (data: Streams) => {
-    console.log({ ...data, audioId: audio.id, userId: audio.userId });
     try {
-      const response = await axios.post("/streams", {
+      const response = await axios.post("streams", {
         ...data,
         audioId: audio.id,
         userId: audio.userId,

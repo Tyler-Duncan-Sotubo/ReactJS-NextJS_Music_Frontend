@@ -15,6 +15,7 @@ export const navData = [
   { name: "Support", href: "/support" },
   { name: "Promotion", href: "/promo" },
   { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export const mobileNavData = [
@@ -25,6 +26,7 @@ export const mobileNavData = [
   { name: "Promotion", href: "/promo" },
   { name: "Support", href: "/support" },
   { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export const mobileLoginNavData = [
