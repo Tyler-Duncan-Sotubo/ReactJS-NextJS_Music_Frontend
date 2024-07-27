@@ -192,7 +192,7 @@ export const pricingFAQ = [
   {
     question: "How much money do I earn per stream?",
     answer:
-      "That depends how much your music is streamed and downloaded. But with Ditto you’ll always keep 100% of the royalties you earn as well as all the rights to your music.",
+      "That depends how much your music is streamed and downloaded. But with us you’ll always keep a percentage of the royalties you earn based on the subscription plan, as well as all the rights to your music.",
   },
 ];
 
@@ -257,7 +257,7 @@ export const musicUploadFAQ = [
   {
     question: "How much money do I earn per stream?",
     answer:
-      "That depends how much your music is streamed and downloaded. But with Ditto you’ll always keep 100% of the royalties you earn as well as all the rights to your music.",
+      "That depends how much your music is streamed and downloaded. But with use you’ll always keep a percentage of the royalties you earn based on the subscription plan as well as all the rights to your music.",
   },
 ];
 
